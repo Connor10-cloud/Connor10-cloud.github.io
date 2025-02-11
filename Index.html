@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.6.4.1 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "NSimSun", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre class="western">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;de&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Buon San Valentino Aery!&lt;/title&gt;
+    &lt;!-- Stili CSS precedenti --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Effetto nebbia --&gt;
+    &lt;div class=&quot;fog&quot;&gt;&lt;/div&gt;
+
+    &lt;!-- Cuori che cadono --&gt;
+    &lt;div id=&quot;fallingHearts&quot;&gt;&lt;/div&gt;
+
+    &lt;!-- Container principale --&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;h1&gt;Buon San Valentino Aery!&lt;/h1&gt;
+
+        &lt;!-- Domanda interattiva --&gt;
+        &lt;div class=&quot;question&quot; id=&quot;question&quot;&gt;
+            &lt;p&gt;Vuoi essere la mia Valentina??&lt;/p&gt;
+            &lt;button class=&quot;yes&quot; id=&quot;yesButton&quot;&gt;
+                Si!
+                &lt;a href=&quot;https://emoji.gg/emoji/5221-purplenod&quot;&gt;
+                    &lt;img src=&quot;https://cdn3.emoji.gg/emojis/5221-purplenod.gif&quot; width=&quot;24px&quot; height=&quot;24px&quot; alt=&quot;purplenod&quot; /&gt;
+                &lt;/a&gt;
+            &lt;/button&gt;
+            &lt;button class=&quot;no&quot; id=&quot;noButton&quot;&gt;No&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Messaggi per quando si clicca &quot;No&quot; --&gt;
+        &lt;div id=&quot;noMessages&quot;&gt;
+            &lt;p&gt;Sicura? Dammi almeno una chance..&lt;/p&gt;
+            &lt;p&gt;Pls pls pls&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Testo finale con dissolvenza --&gt;
+        &lt;div id=&quot;finalMessage&quot; style=&quot;display:none;&quot; class=&quot;fade-in&quot;&gt;
+            &lt;p&gt;Oggi è il giorno dell’amore, ma in realtà non serve una data speciale per dirti quanto tu sia importante. &lt;/p&gt;
+            &lt;p&gt;Sei quella luce che illumina anche le giornate più grigie, il pensiero che mi fa sorridere senza motivo.  &lt;/p&gt;
+            &lt;p&gt;Che questo giorno sia solo un piccolo riflesso di tutto l’affetto e la felicità che meriti, oggi e sempre.&lt;/p&gt;
+            &lt;p&gt;Con tutto il cuore, a te Aurora. 💖&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Cuore interattivo --&gt;
+        &lt;span class=&quot;heart heart-pulse&quot;&gt;❤️&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Musica di sottofondo --&gt;
+    &lt;audio autoplay loop muted id=&quot;backgroundMusic&quot;&gt;
+        &lt;source src=&quot;Lady Gaga,Bruno Mars - Die with a smile.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
+        Il tuo browser non supporta l'elemento audio.
+    &lt;/audio&gt;
+
+    &lt;!-- Script per le interazioni --&gt;
+    &lt;script&gt;
+        let yesButton = document.getElementById('yesButton');
+        let noButton = document.getElementById('noButton');
+        let noMessages = document.getElementById('noMessages');
+        let questionDiv = document.getElementById('question');
+        let finalMessage = document.getElementById('finalMessage');
+        let audio = document.getElementById('backgroundMusic');
+        let yesSize = 1;
+
+        // Abilita la riproduzione audio al primo clic
+        document.addEventListener('click', () =&gt; {
+            audio.muted = false;
+            audio.play();
+        });
+
+        // Funzione per creare cuori che cadono
+        function createFallingHearts() {
+            setInterval(() =&gt; {
+                let heart = document.createElement('div');
+                heart.classList.add('heart-fall');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() =&gt; heart.remove(), 5000);
+            }, 300);
+        }
+
+        // Funzione per creare confetti
+        function createConfetti() {
+            const confettiCount = 100;
+            for (let i = 0; i &lt; confettiCount; i++) {
+                let confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.body.appendChild(confetti);
+                setTimeout(() =&gt; confetti.remove(), 5000);
+            }
+        }
+
+        // Evento per il pulsante &quot;Sì&quot;
+        yesButton.addEventListener('click', () =&gt; {
+            audio.play(); // Forza la riproduzione
+            createConfetti();
+            questionDiv.style.display = 'none';
+            finalMessage.style.display = 'block';
+            noMessages.style.display = 'none';
+            finalMessage.classList.add('fade-in');
+        });
+
+        // Evento per il pulsante &quot;No&quot;
+        noButton.addEventListener('click', () =&gt; {
+            noMessages.style.display = 'block';
+            yesSize += 0.3;
+            yesButton.style.transform = `scale(${yesSize})`;
+        });
+
+        // Avvia l'animazione dei cuori che cadono
+        createFallingHearts();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>
