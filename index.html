@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buon San Valentino Aery!</title>
+    <!-- Stili CSS precedenti -->
+</head>
+<body>
+    <!-- Effetto nebbia -->
+    <div class="fog"></div>
+
+    <!-- Cuori che cadono -->
+    <div id="fallingHearts"></div>
+
+    <!-- Container principale -->
+    <div class="container">
+        <h1>Buon San Valentino Aery!</h1>
+
+        <!-- Domanda interattiva -->
+        <div class="question" id="question">
+            <p>Vuoi essere la mia Valentina??</p>
+            <button class="yes" id="yesButton">
+                Si!
+                <a href="https://emoji.gg/emoji/5221-purplenod">
+                    <img src="https://cdn3.emoji.gg/emojis/5221-purplenod.gif" width="24px" height="24px" alt="purplenod" />
+                </a>
+            </button>
+            <button class="no" id="noButton">No</button>
+        </div>
+
+        <!-- Messaggi per quando si clicca "No" -->
+        <div id="noMessages">
+            <p>Sicura? Dammi almeno una chance..</p>
+            <p>Pls pls pls</p>
+        </div>
+
+        <!-- Testo finale con dissolvenza -->
+        <div id="finalMessage" style="display:none;" class="fade-in">
+            <p>Oggi è il giorno dell’amore, ma in realtà non serve una data speciale per dirti quanto tu sia importante. </p>
+            <p>Sei quella luce che illumina anche le giornate più grigie, il pensiero che mi fa sorridere senza motivo.  </p>
+            <p>Che questo giorno sia solo un piccolo riflesso di tutto l’affetto e la felicità che meriti, oggi e sempre.</p>
+            <p>Con tutto il cuore, a te Aurora. 💖</p>
+        </div>
+
+        <!-- Cuore interattivo -->
+        <span class="heart heart-pulse">❤️</span>
+    </div>
+
+    <!-- Musica di sottofondo -->
+    <audio autoplay loop controls id="backgroundMusic">
+        <source src="Lady Gaga,Bruno Mars - Die with a smile.mp3" type="audio/mpeg">
+        <source src="Lady Gaga,Bruno Mars - Die with a smile.ogg" type="audio/ogg">
+        <source src="Lady Gaga,Bruno Mars - Die with a smile.wav" type="audio/wav">
+        <a href="Lady Gaga,Bruno Mars - Die with a smile.mp3" download>Scarica la canzone</a>.
+    </audio>
+
+    <!-- Script per le interazioni -->
+    <script>
+        let yesButton = document.getElementById('yesButton');
+        let noButton = document.getElementById('noButton');
+        let noMessages = document.getElementById('noMessages');
+        let questionDiv = document.getElementById('question');
+        let finalMessage = document.getElementById('finalMessage');
+        let audio = document.getElementById('backgroundMusic');
+        let yesSize = 1;
+
+        // Abilita la riproduzione audio al primo clic
+        document.addEventListener('click', () => {
+            audio.muted = false;
+            audio.play();
+        });
+
+        // Funzione per creare cuori che cadono
+        function createFallingHearts() {
+            setInterval(() => {
+                let heart = document.createElement('div');
+                heart.classList.add('heart-fall');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+
+        // Funzione per creare confetti
+        function createConfetti() {
+            const confettiCount = 100;
+            for (let i = 0; i < confettiCount; i++) {
+                let confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Evento per il pulsante "Sì"
+        yesButton.addEventListener('click', () => {
+            audio.play(); // Forza la riproduzione
+            createConfetti();
+            questionDiv.style.display = 'none';
+            finalMessage.style.display = 'block';
+            noMessages.style.display = 'none';
+            finalMessage.classList.add('fade-in');
+        });
+
+        // Evento per il pulsante "No"
+        noButton.addEventListener('click', () => {
+            noMessages.style.display = 'block';
+            yesSize += 0.3;
+            yesButton.style.transform = `scale(${yesSize})`;
+        });
+
+        // Avvia l'animazione dei cuori che cadono
+        createFallingHearts();
+    </script>
+</body>
+</html>
