@@ -129,18 +129,6 @@
             animation: fall 5s linear infinite;
         }
 
-        /* Effetto di scrittura animata */
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .typing-effect {
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 3s steps(40, end);
-        }
-
         /* Effetto confetti */
         @keyframes confetti-fall {
             0% { transform: translateY(-100px) rotate(0deg); }
@@ -212,11 +200,6 @@
             .heart {
                 font-size: 2rem;
             }
-
-            .typing-effect {
-                white-space: normal;
-                animation: none;
-            }
         }
 
         /* Effetto di dissolvenza per il testo finale */
@@ -261,10 +244,10 @@
 
         <!-- Testo finale con dissolvenza -->
         <div id="finalMessage" style="display:none;" class="fade-in">
-            <p>Oggi è il giorno dell’amore, ma in realtà non serve una data speciale per dirti quanto tu sia importante. </p>
-            <p>Sei quella luce che illumina anche le giornate più grigie, il pensiero che mi fa sorridere senza motivo.  </p>
-            <p>Che questo giorno sia solo un piccolo riflesso di tutto l’affetto e la felicità che meriti, oggi e sempre.</p>
-            <p>Con tutto il cuore, a te Aurora. 💖</p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
         </div>
 
         <!-- Cuore interattivo -->
@@ -312,6 +295,20 @@
             }
         }
 
+        // Funzione per l'effetto di scrittura
+        function typeWriter(element, text, speed) {
+            let i = 0;
+            element.innerHTML = ""; // Pulisci il contenuto iniziale
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
         // Evento per il pulsante "Sì"
         yesButton.addEventListener('click', () => {
             const audio = document.getElementById('backgroundAudio');
@@ -323,6 +320,24 @@
             finalMessage.style.display = 'block';
             noMessages.style.display = 'none';
             finalMessage.classList.add('fade-in');
+
+            // Testo da visualizzare con l'effetto di scrittura
+            const messageLines = [
+                "Oggi è il giorno dell’amore, ma in realtà non serve una data speciale per dirti quanto tu sia importante.",
+                "Sei quella luce che illumina anche le giornate più grigie, il pensiero che mi fa sorridere senza motivo.",
+                "Che questo giorno sia solo un piccolo riflesso di tutto l’affetto e la felicità che meriti, oggi e sempre.",
+                "Con tutto il cuore, a te Aurora. 💖"
+            ];
+
+            // Avvia l'effetto di scrittura per ogni paragrafo
+            const paragraphs = document.querySelectorAll('#finalMessage p');
+            let delay = 0;
+            paragraphs.forEach((paragraph, index) => {
+                setTimeout(() => {
+                    typeWriter(paragraph, messageLines[index], 50);
+                }, delay);
+                delay += messageLines[index].length * 50 + 1000; // Aggiungi un ritardo tra i paragrafi
+            });
         });
 
         // Evento per il pulsante "No"
