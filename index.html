@@ -272,7 +272,7 @@
     </div>
 
     <!-- Musica di sottofondo -->
-    <audio autoplay loop>
+    <audio id="backgroundAudio" loop>
         <source src="Lady Gaga,Bruno Mars - Die with a smile.mp3" type="audio/mpeg">
         Il tuo browser non supporta l'elemento audio.
     </audio>
@@ -314,11 +314,15 @@
 
         // Evento per il pulsante "Sì"
         yesButton.addEventListener('click', () => {
+            const audio = document.getElementById('backgroundAudio');
+            audio.volume = 0.5; // Imposta il volume
+            audio.play(); // Avvia la riproduzione
+
             createConfetti();
             questionDiv.style.display = 'none';
             finalMessage.style.display = 'block';
             noMessages.style.display = 'none';
-            finalMessage.classList.add('fade-in'); // Aggiunge l'effetto di dissolvenza
+            finalMessage.classList.add('fade-in');
         });
 
         // Evento per il pulsante "No"
