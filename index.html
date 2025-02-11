@@ -225,6 +225,37 @@
         .fade-in {
             animation: fadeInText 2s ease-in-out;
         }
+
+        /* Cursore lampeggiante */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #e63946;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { background-color: transparent; }
+            50% { background-color: #e63946; }
+        }
+
+        /* Stile per l'emoji di Mocha */
+        #mocha-emoji {
+            text-align: center; /* Centra l'emoji orizzontalmente */
+            margin-top: 20px; /* Aggiunge spazio sopra l'emoji */
+            display: none; /* Nascondi inizialmente l'emoji */
+        }
+
+        #mocha-emoji img {
+            width: 160px; /* Rendi l'emoji più grande */
+            height: 160px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #mocha-emoji img:hover {
+            transform: scale(1.1); /* Effetto hover */
+        }
     </style>
 </head>
 <body>
@@ -266,6 +297,13 @@
 
         <!-- Cuore interattivo -->
         <span class="heart heart-pulse">❤️</span>
+
+        <!-- Emoji di Mocha -->
+        <div id="mocha-emoji">
+            <a href="https://emoji.gg/emoji/56142-mocha">
+                <img src="https://cdn3.emoji.gg/emojis/56142-mocha.gif" width="160px" height="160px" alt="Mocha">
+            </a>
+        </div>
     </div>
 
     <!-- Musica di sottofondo -->
@@ -281,6 +319,7 @@
         let noMessages = document.getElementById('noMessages');
         let questionDiv = document.getElementById('question');
         let finalMessage = document.getElementById('finalMessage');
+        let mochaEmoji = document.getElementById('mocha-emoji'); // Riferimento all'emoji di Mocha
         let yesSize = 1;
 
         // Funzione per creare cuori che cadono
@@ -318,6 +357,9 @@
                     element.innerHTML += text.charAt(i);
                     i++;
                     setTimeout(type, speed);
+                } else {
+                    // Aggiungi il cursore lampeggiante dopo la scrittura
+                    element.innerHTML += '<span class="typing-cursor"></span>';
                 }
             }
             type();
@@ -334,6 +376,9 @@
             finalMessage.style.display = 'block';
             noMessages.style.display = 'none';
             finalMessage.classList.add('fade-in');
+
+            // Mostra l'emoji di Mocha
+            mochaEmoji.style.display = 'block';
 
             // Testo da visualizzare con l'effetto di scrittura
             const messageLines = [
